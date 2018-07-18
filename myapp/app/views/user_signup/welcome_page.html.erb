@@ -1,0 +1,21 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<div> welcome <%= cookies[:email] %></div>      
+
+<div id="logout">Logout</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#logout").click(function(){
+			$.ajax({
+				url:'sign_out',
+			    type:'get',
+			    success: function(data){
+			    	window.location = "http://localhost";
+			    },
+			    error: function(){
+			    	alert("logout fails");
+			    }
+			});
+		});
+	});
+</script>
