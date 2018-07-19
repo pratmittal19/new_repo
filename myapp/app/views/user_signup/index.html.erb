@@ -127,8 +127,11 @@
 		                	modal1.style.display = "none";
 		                	$("form")[0].reset();
 		                	alert(data["message"]);
-		                	$("#link-confirm").append("<p>If u didn't get the mail Please <a href='http://localhost:3000/"+data["token"]+"/confirm_email'> confirm </a> here</p>");
-		                	$('#link-modal').delay(10000).fadeIn(100);              	
+		                	if (data["success"] == true){
+			                	$("#link-confirm").append("<p>If u didn't get the mail Please <a href='http://localhost:3000/"+data["token"]+"/confirm_email'> confirm </a> here</p>");
+			                	$('#link-modal').delay(10000).fadeIn(100);
+			                }
+
 			            },
 					    error: function(XMLHttpRequest, textStatus, errorThrown)
 			            {

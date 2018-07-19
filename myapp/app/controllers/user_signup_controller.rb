@@ -8,7 +8,7 @@ class UserSignupController < ApplicationController
 	def sign_up
 		existing_user = UserLogin.find_by_email(params[:email])
 		if !existing_user.blank? && existing_user.email_confirmed
-			render :json => {:message => "User already exists"}
+			render :json => {:message => "User already exists", :success => false}
 		else
 			if !existing_user.blank? && (existing_user.email_confirmed == false || existing_user.email_confirmed.nil?)
 				UserLogin.find_by_email(params[:email]).delete
@@ -16,7 +16,7 @@ class UserSignupController < ApplicationController
 			@user = UserLogin.create(:email => params[:email], :password => params[:password])
 			@user.set_confirmation_token
       		@user.save(validate: false)
-      		render :json => {:message => "Please confirm your email address to continue", :token => @user.confirm_token}
+      		render :json => {:message => "Please confirm your email address to continue", :token => @user.confirm_token, :success => true}
       		UserMailer.send_mail_confirmation(@user).deliver	      	
 		end
 	end
