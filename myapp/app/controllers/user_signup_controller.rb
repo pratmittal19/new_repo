@@ -16,7 +16,7 @@ class UserSignupController < ApplicationController
 			@user = UserLogin.create(:email => params[:email], :password => params[:password])
 			@user.set_confirmation_token
       		@user.save(validate: false)
-      		render :json => {:message => "Please confirm your email address to continue"}
+      		render :json => {:message => "Please confirm your email address to continue", :token => @user.confirm_token}
       		UserMailer.send_mail_confirmation(@user).deliver	      	
 		end
 	end
