@@ -16,8 +16,9 @@ class UserSignupController < ApplicationController
 			@user = UserLogin.create(:email => params[:email], :password => params[:password])
 			@user.set_confirmation_token
       		@user.save(validate: false)
+      		@url = request.protocol+request.url.split('/')[2]
       		render :json => {:message => "Please confirm your email address to continue", :token => @user.confirm_token, :success => true}
-      		UserMailer.send_mail_confirmation(@user).deliver	      	
+      		UserMailer.send_mail_confirmation(@user,@url).deliver	      	
 		end
 	end
 
@@ -28,7 +29,7 @@ class UserSignupController < ApplicationController
 		    @user.save(validate: true)
 		    cookies[:log_in_user]={:value=>"true",:domain=>request.host}
 	  		cookies[:email]={:value=>@user.email,:domain=>request.host}
-			redirect_to "http://localhost/welcome_page"
+			redirect_to request.protocol+request.url.split('/')[2]+"/welcome_page"
 	    else
 		    flash[:error] = "Sorry. User does not exist"
 		    redirect_to root_url
@@ -39,7 +40,7 @@ class UserSignupController < ApplicationController
 		if cookies[:log_in_user] == "true"
 			render "welcome_page"
 		else
-			redirect_to "http://localhost"
+			redirect_to request.protocol+request.url.split('/')[2]
 		end
 	end
 

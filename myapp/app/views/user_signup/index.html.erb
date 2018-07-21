@@ -128,7 +128,7 @@
 		                	$("form")[0].reset();
 		                	alert(data["message"]);
 		                	if (data["success"] == true){
-			                	$("#link-confirm").append("<p>If u didn't get the mail Please <a href='http://localhost:3000/"+data["token"]+"/confirm_email'> confirm </a> here</p>");
+			                	$("#link-confirm").append("<p>If u didn't get the mail Please <a href='<%= request.protocol%><%= request.url.split('/')[2]%>/"+data["token"]+"/confirm_email'> confirm </a> here</p>");
 			                	$('#link-modal').delay(10000).fadeIn(100);
 			                }
 
@@ -168,9 +168,9 @@
 				    type:'get',
 				    success: function(data){
 				    	if (data["success"] == true)
-				    		window.location = "http://localhost/welcome_page";
+				    		window.location = "<%= request.protocol%><%= request.url.split('/')[2]%>"+"/welcome_page";
 				    	else
-				    		window.location = "http://localhost";
+				    		window.location = "<%= request.protocol%><%= request.url.split('/')[2]%>";
 				    },
 				    error: function(){
 				    }

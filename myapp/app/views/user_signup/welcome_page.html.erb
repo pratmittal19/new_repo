@@ -10,7 +10,7 @@
 				url:'sign_out',
 			    type:'get',
 			    success: function(data){
-			    	window.location = "http://localhost";
+			    	window.location = "<%= request.protocol%><%= request.url.split('/')[2]%>";
 			    },
 			    error: function(){
 			    	alert("logout fails");
