@@ -1,7 +1,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <div> welcome <%= cookies[:email] %></div>      
-
-<div id="logout">Logout</div>
+<br>
+<div id="logout" style="cursor: pointer; color: blue;">Logout</div>
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -10,7 +10,7 @@
 				url:'sign_out',
 			    type:'get',
 			    success: function(data){
-			    	window.location = "<%= request.protocol%><%= request.url.split('/')[2]%>";
+			    	window.location = "/";
 			    },
 			    error: function(){
 			    	alert("logout fails");

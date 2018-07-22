@@ -29,7 +29,7 @@ class UserSignupController < ApplicationController
 		    @user.save(validate: true)
 		    cookies[:log_in_user]={:value=>"true",:domain=>request.host}
 	  		cookies[:email]={:value=>@user.email,:domain=>request.host}
-			redirect_to request.protocol+request.url.split('/')[2]+"/welcome_page"
+			redirect_to "/welcome_page"
 	    else
 		    flash[:error] = "Sorry. User does not exist"
 		    redirect_to root_url
@@ -40,7 +40,7 @@ class UserSignupController < ApplicationController
 		if cookies[:log_in_user] == "true"
 			render "welcome_page"
 		else
-			redirect_to request.protocol+request.url.split('/')[2]
+			redirect_to "/"
 		end
 	end
 

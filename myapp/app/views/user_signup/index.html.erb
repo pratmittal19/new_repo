@@ -18,7 +18,7 @@
     margin: 15% auto; 
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; 
+    width: 60%; 
 }
 
 .close, .close1 {
@@ -35,6 +35,25 @@
     cursor: pointer;
 }
 
+button, input, #submit, #login {
+    /*background-color: #73d3d8;*/
+    border: none;
+    color: white;
+    padding: 13px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+input {
+	background-color: #b1e8ea;
+}
+
+button, #submit, #login {
+	background-color: #73d3d8;
+}
 </style>
 <button id="myBtn">Sign up</button>
 <button id="myBtn1">Login</button>
@@ -47,6 +66,7 @@
 		    	<tr><td>Password : </td><td><input type="Password" name="password" id="password" required="true"></td></tr>
 		    	<tr><td>Re Password : </td><td><input type="password" name="password" id="password1" required="true"></td></tr>
 		    </table>
+		    <br><br>
 		    <input type="submit" id="submit" value="Sign up">
 		</form>
     </ul>
@@ -60,6 +80,7 @@
 		    	<tr><td>Email : </td><td><input type="text" name="email" id="email1" required="true"></td></tr>
 		    	<tr><td>Password : </td><td><input type="Password" name="password" id="password2" required="true"></td></tr>
 		    </table>
+			<br><br>
 		    <input type="submit" id="login" value="Login">
 		</form>
     </ul>
@@ -127,7 +148,7 @@
 		                	modal1.style.display = "none";
 		                	$("form")[0].reset();
 		                	alert(data["message"]);
-		                	if (data["success"] == true){
+		                	if (data["success"] == true && window.location.href.includes('localhost')){
 			                	$("#link-confirm").append("<p>If u didn't get the mail Please <a href='<%= request.protocol%><%= request.url.split('/')[2]%>/"+data["token"]+"/confirm_email'> confirm </a> here</p>");
 			                	$('#link-modal').delay(10000).fadeIn(100);
 			                }
@@ -168,9 +189,9 @@
 				    type:'get',
 				    success: function(data){
 				    	if (data["success"] == true)
-				    		window.location = "<%= request.protocol%><%= request.url.split('/')[2]%>"+"/welcome_page";
+				    		window.location = "/welcome_page";
 				    	else
-				    		window.location = "<%= request.protocol%><%= request.url.split('/')[2]%>";
+				    		window.location = "/";
 				    },
 				    error: function(){
 				    }
